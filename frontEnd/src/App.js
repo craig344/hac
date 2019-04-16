@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import NavBar from './navBar/navBar';
 
-class App extends Component{
-  render(){
-    return(
+class App extends Component {
+  render() {
+    return (
       <div>
+        <NavBar/>
         <p>Work in progress.</p>
       </div>
-    )
+    );
   }
 }
 
