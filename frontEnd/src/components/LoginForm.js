@@ -35,7 +35,7 @@ class LoginForm extends Component {
         return (
         <div className="FormCenter">
          
-         <form className="FormFields" onSubmit={this.handleSubmit}>
+         <form onSubmit={this.handleSubmit} className="FormFields">
          
             <div className="FormField">
             <label className="FormField__Label" htmlFor="number"> ID Card Number </label>
