@@ -118,8 +118,8 @@
     color: #66707D;
     text-decoration: none;
     display: inline-block;
-    border-bottom: 1.5px solid #225E62;
-    padding-bottom: 5px;
+    border-bottom: 2px solid #225E62;
+    padding-bottom: 11px;
   }
   
   .FormField__CheckboxLabel {
