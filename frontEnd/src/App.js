@@ -9,12 +9,10 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-
           <div>
             <NavBar />
             <Content />
           </div>
-
       </BrowserRouter>
     );
   }
