@@ -37,7 +37,7 @@ class App extends Component {
         render() {
           const columns = [
             {
-              Header: "User Id",
+              Header: "Item Name",
               accessor: "userId",
               style:{
                 textAlign: "right"
@@ -47,7 +47,7 @@ class App extends Component {
               minWidth: 100
             },
             {
-              Header: "Id",
+              Header: "Item Category",
               accessor: "id",
               style:{
                 textAlign: "right"
@@ -57,13 +57,13 @@ class App extends Component {
               minWidth: 100
             },
             {
-              Header: "Title",
+              Header: "Item Description",
               accessor: "title",
               sortable: false,
               filterable: false
             },
             {
-              Header: "Body",
+              Header: "Item Price",
               accessor: "body",
               sortable: false,
               filterable: false
@@ -77,6 +77,23 @@ class App extends Component {
                     this.deleteRow(props.original.id);
                   }}
                   >Delete</button>
+                )
+              },
+              sortable: false,
+              filterable: false,
+              width: 100,
+              maxWidth: 100,
+              minWidth: 100
+            },
+            {
+              Header: "Edit",
+              Cell: props =>{
+                return(
+                  <button style={{backgroundColor: "Black", color: "#fefefe"}}
+                  onClick={() =>{
+                    this.editRow(props.original.id);
+                  }}
+                  >Edit</button>
                 )
               },
               sortable: false,
