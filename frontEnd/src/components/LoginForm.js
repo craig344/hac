@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
 
           <div className="FormField">
-            <button className="FormField__Button mr-20"> Login </button>  <Link to="/" className="FormField__Link">Create an account</Link>
+          <Link to="/home"><button className="FormField__Button mr-20"> Login </button></Link>  <Link to="/" className="FormField__Link">Create an account</Link>
           </div>
         
          </form>

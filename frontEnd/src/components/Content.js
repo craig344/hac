@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
+import table from './table'
 
 
 function Content() {
@@ -29,8 +30,11 @@ function Content() {
 
                 </Route>
 
+                <Route path="/home" component={table}>
+                </Route>
+
             </div>
-            
+
 
 
 
