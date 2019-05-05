@@ -126,6 +126,16 @@ class App extends Component {
             </ReactTable>
       
           );
+  render() {
+
+    return (
+      <BrowserRouter>
+          <div>
+            <NavBar />
+            <Content />
+          </div>
+      </BrowserRouter>
+    );
   }
 }
 
