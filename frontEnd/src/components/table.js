@@ -120,8 +120,8 @@ class Table extends Component {
                         </div>
                     )
                 }}
-
             </ReactTable>
+                    
         );
     }
 }

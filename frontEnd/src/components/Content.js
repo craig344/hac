@@ -7,7 +7,37 @@ import table from './table'
 
 function Content() {
     return (
+        <div>
+            <Route path="/home" component={table}>
+          </Route>
         <div className="App">
+            
+                <div className="App__Aside"> </div>
+
+                <div className="App__Form">
+
+                    <div className="PageSwitcher">
+                        <NavLink to="/login" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item"> Login </NavLink>
+                        <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item"> Sign Up </NavLink>
+                    </div>
+
+                    <div className="FormTitle">
+                        <NavLink to="/login" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Login </NavLink> or
+<NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up </NavLink>
+                    </div>
+
+                    <Route exact path="/" component={SignupForm}>
+
+                    </Route>
+
+                    <Route path="/login" component={LoginForm}>
+
+                    </Route>
+
+
+
+                </div>
+            </div>
             <div className="App__Aside"> </div>
 
             <div className="App__Form">
@@ -30,16 +60,12 @@ function Content() {
 
                 </Route>
 
-                <Route path="/home" component={table}>
-                </Route>
+
 
             </div>
-
-
-
-
-
         </div>
+
+
     );
 }
 
