@@ -15,7 +15,7 @@ class Login extends Component {
     }
 
     handleChange(event) {
-        this.setState({name: event.target.value});
+        this.setState({ name: event.target.value });
     }
 
     handleSubmit(event) {
@@ -24,30 +24,35 @@ class Login extends Component {
     }
 
     render() {
-        return(
-            <div className="container register-form">
+        return (
+
             <div className="form-content">
                 <form onSubmit={this.handlesubmit} className="form">
-                <div className="row">
-                    <div className="col-md-6">
-                    <div className="form-group">
-                        <label className=""> Id Card Number </label>
-                        <input type="number" className="form-control" id="number" placeholder="Enter Your Id Card Number" onChange={this.handleChange} value={this.state.number} />
-                    </div>
+                    <div className="row">
+                        <div className="col-3"></div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label className=""> Id Card Number: </label>
+                                <input type="number" className="form-control" id="number" placeholder="Enter Your Id Card Number" onChange={this.handleChange} value={this.state.number} />
+                            </div>
 
-                    <div className="form-group">
-                        <label> Password </label>
-                        <input type="password" className="form-control" id="password" value={this.state.password} onChange={this.state.handleChange} placeholder="Enter The Password" />
+                            <div className="form-group">
+                                <label> Password: </label>
+                                <input type="password" className="form-control" id="password" value={this.state.password} onChange={this.state.handleChange} placeholder="Enter The Password" />
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-
-                    <div>
-                        <button type="submit" className="btnSubmit"> Login </button>
+                    <div className="row">
+                        <div className="col-3"></div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <button type="submit" className="btn btn-primary"> Login </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
-            </div>
+
         )
     }
 }
