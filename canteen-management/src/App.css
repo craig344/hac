@@ -26,3 +26,43 @@
     background: #0062cc;
     color: #fff;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+html,
+body {
+  min-height: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font: 16px 'Roboto', Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: #f6f6f6;
+}
+
+.app {
+  max-width: 60rem;
+  width: 100%;
+  background: lightgray;
+  padding: 1rem;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+}
