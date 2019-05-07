@@ -2,10 +2,12 @@ import React from 'react';
 import { BrowserRouter, NavLink, Route } from "react-router-dom";
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
+    <Navbar />
       <div className="row">
         <div className="col-3"></div>
         <div className="col-6 card bg-light">
