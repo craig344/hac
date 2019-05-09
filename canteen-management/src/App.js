@@ -13,14 +13,14 @@ function App() {
         <div className="col-3"></div>
         <div className="col-6 card bg-light">
 
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
+          <ul className="nav nav-tabs">
+            <li className="nav-item">
               <NavLink exact to="/" activeClassName="nav-link  active" className="nav-link"> Login </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink exact to="/signUp" activeClassName="nav-link  active" className="nav-link"> Sign Up </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink exact to="/menu" activeClassName="nav-link  active" className="nav-link"> Menu </NavLink>
             </li>
           </ul>
