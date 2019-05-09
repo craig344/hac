@@ -3,6 +3,7 @@ import { BrowserRouter, NavLink, Route } from "react-router-dom";
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Navbar from "./components/Navbar";
+import Menu from './components/Menu';
 
 function App() {
   return (
@@ -19,13 +20,18 @@ function App() {
             <li class="nav-item">
               <NavLink exact to="/signUp" activeClassName="nav-link  active" className="nav-link"> Sign Up </NavLink>
             </li>
-
+            <li class="nav-item">
+              <NavLink exact to="/menu" activeClassName="nav-link  active" className="nav-link"> Menu </NavLink>
+            </li>
           </ul>
           <Route exact path="/SignUp" component={SignUp}>
 
           </Route>
 
           <Route exact path="/" component={Login}>
+
+          </Route>
+          <Route exact path="/menu" component={Menu}>
 
           </Route>
         </div>

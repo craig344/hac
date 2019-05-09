@@ -33,7 +33,7 @@ class Login extends Component {
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label className=""> Id Card Number: </label>
-                                <input type="number" className="form-control" id="number" placeholder="Enter Your Id Card Number" onChange={this.handleChange} value={this.state.number} />
+                                <input type="text" className="form-control" id="number" placeholder="Enter Your Id Card Number" onChange={this.handleChange} value={this.state.number} />
                             </div>
 
                             <div className="form-group">

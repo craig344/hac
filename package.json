@@ -1,0 +1,25 @@
+{
+  "name": "hac",
+  "version": "1.0.0",
+  "description": "Web Dev Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craig344/hac.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/craig344/hac/issues"
+  },
+  "homepage": "https://github.com/craig344/hac#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mysql": "^2.17.1"
+  }
+}
