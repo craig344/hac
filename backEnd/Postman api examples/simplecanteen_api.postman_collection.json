@@ -6,97 +6,468 @@
 	},
 	"item": [
 		{
-			"name": "localhost:4000/api/users/register",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\":\"Duplicate Ulhas Naik\",\n\t\"phone\":\"2233456754\",\n\t\"password\":\"password1234\"\n}"
+			"name": "Items",
+			"item": [
+				{
+					"name": "create new Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"veg thali\",\n\t\"price\":\"a\",\n\t\"description\":\"some veg\",\n\t\"category\":\"veg,thali\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/item/create",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"item",
+								"create"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/api/users/register",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"users",
-						"register"
-					]
+				{
+					"name": "update an item by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"1\",\n\t\"name\":\"new veg thali\",\n\t\"description\":\"same old veggies\",\n\t\"price\":\"45\",\n\t\"category\":\"veg,new\",\n\t\"available\":\"0\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/item",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an item by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:4000/api/item?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"item"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All items from database",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:4000/api/items",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"items"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "localhost:4000/api/users/login",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"phone\":\"2233456754\",\n\t\"password\":\"password1234\"\n}"
+			"name": "User",
+			"item": [
+				{
+					"name": "localhost:4000/api/users/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Duplicate Ulhas Naik\",\n\t\"phone\":\"2233456754\",\n\t\"password\":\"password1234\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/api/users/login",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"users",
-						"login"
-					]
+				{
+					"name": "localhost:4000/api/users/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_card_no\":\"2233456756\",\n\t\"password\":\"password1234\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:4000/api/users/login fail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"phone\":\"2233456754\",\n\t\"password\":\"password123\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register kitchen user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Veden Union\",\n\t\"id_card_no\":\"skaa123456\",\n\t\"password\":\"password1234\",\n\t\"type\":\"kitchen\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "localhost:4000/api/users/login fail",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"phone\":\"2233456754\",\n\t\"password\":\"password123\"\n}"
+			"name": "Orders",
+			"item": [
+				{
+					"name": "create new Order for customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"customer_id\":\"1\",\n\t\"total\":\"20\",\n\t\"item_count\":\"2\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/order",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/api/users/login",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"users",
-						"login"
-					]
+				{
+					"name": "get all orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:4000/api/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an order by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:4000/api/order?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"order"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get orders by  customer Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:4000/api/order/byCustomer?customer_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"order",
+								"byCustomer"
+							],
+							"query": [
+								{
+									"key": "customer_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"1\",\n\t\"total\":\"65\",\n\t\"item_count\":\"3\",\n\t\"status\":\"completed\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/order",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "order_items",
+			"item": [
+				{
+					"name": "add a new orderItem to an order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"order_id\":\"2\",\n\t\"item_id\":\"1\",\n\t\"quantity\":\"2\",\n\t\"rate\":\"45\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4000/api/orderItem",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"orderItem"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
