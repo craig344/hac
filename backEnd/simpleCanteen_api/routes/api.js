@@ -231,5 +231,48 @@ router.put('/order', [
 
 /**--------- Order Item Routes------------------------------------ */
 
+//add a new orderItem to the db
+router.post('/orderItem', [
+    check('order_id')
+        .isInt().withMessage('must be an integer'),
+    check('item_id')
+        .isInt().withMessage('must be an integer'),
+    check('quantity')
+        .isInt().withMessage('must be a integer'),
+    check('rate')
+        .isNumeric().withMessage('must be an Number'),
+], function (req, res) {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
+    var orderItem = {
+        order_id: req.body.order_id,
+        item_id: req.body.item_id,
+        quantity: req.body.quantity,
+        rate: req.body.rate
+    };
+    const orderItemModel = require('./../models/order_items');
+
+    orderItemModel.create(db, orderItem, function (response) {
+        res.send(response);
+    });
+
+});
+
+//add a new orderItem array to the db
+router.post('/orderItems', function (req, res) {
+   
+    var orderItems = req.body;
+   
+    const orderItemModel = require('./../models/order_items');
+
+    orderItemModel.createMultiple(db, orderItems, function (response) {
+        res.send(response);
+    });
+
+});
 
 module.exports = router;

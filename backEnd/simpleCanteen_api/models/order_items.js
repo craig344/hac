@@ -32,7 +32,7 @@ var order_items = {
 
         });
     },
-    createMultiple: function (order_items, callback) {
+    createMultiple: function (db,order_items, callback) {
 
         let order_items_arr = [];
         for (var i = 0; i < order_items.length; i++) {
