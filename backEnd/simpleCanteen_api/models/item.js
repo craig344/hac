@@ -1,7 +1,7 @@
-const db = require('./../database');
+
 
 var item = {
-    create: function (item, callback) {
+    create: function (db,item, callback) {
 
         let itemObj = {
             name: item.name,
@@ -33,7 +33,7 @@ var item = {
 
         });
     },
-    getAll: function (callback) {
+    getAll: function (db,callback) {
         let sql = 'SELECT * FROM item';
         let query = db.query(sql, (err, result) => {
             if (err) throw err;
@@ -57,7 +57,7 @@ var item = {
             }
         });
     },
-    getbyId: function (item, callback) {
+    getbyId: function (db,item, callback) {
         let sql = 'SELECT * FROM item where id =?';
         let query = db.query(sql, [item.id], (err, result) => {
             if (err) throw err;
@@ -81,10 +81,10 @@ var item = {
             }
         });
     },
-    update: function (item, callback) {     
+    update: function (db,item, callback) {     
 
-        let sql = 'UPDATE item SET name = ?,description = ?,price=?,category=?,status=? where id = ?';
-        let query = db.query(sql, [item.name, item.description, item.price, item.category, item.status, item.id], (err, result) => {
+        let sql = 'UPDATE item SET name = ?,description = ?,price=?,category=?,available=? where id = ?';
+        let query = db.query(sql, [item.name, item.description, item.price, item.category, item.available, item.id], (err, result) => {
             if (err) {
                 console.log(err);
                 let response = {
@@ -95,7 +95,8 @@ var item = {
                     }
                 }
                 return callback(response);
-            }
+            }            
+            
             let response = {
                 success: true,
                 data: {
@@ -107,7 +108,7 @@ var item = {
         });
 
     },
-    deletebyId: function (item, callback) {
+    deletebyId: function (db,item, callback) {
         let sql = 'DELETE FROM item where id =?';
         let query = db.query(sql, [item.id], (err, result) => {
             if (err) throw err;

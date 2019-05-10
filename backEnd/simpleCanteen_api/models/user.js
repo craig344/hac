@@ -6,7 +6,7 @@ var user = {
         this.db = db;
 
     },
-    register: function (user, callback) {
+    create: function (user, callback) {
 
         console.log("received registration request");
         var salt = genRandomString(16); /** Gives us salt of length 16 */
@@ -14,10 +14,10 @@ var user = {
 
         let userObj = {
             name: user.name,
-            phone: user.phone,
+            id_card_no: user.id_card_no,
             salt: passwordData.salt,
             passwordHash: passwordData.passwordHash,
-            user_type: "customer"
+            user_type: user.type
         }
 
         let sql = 'INSERT INTO user SET ?';
@@ -33,27 +33,38 @@ var user = {
                 }
                 return callback(response);
             }
+            if (user.type == "customer") {
 
-            //insert user in customer table
-            let customerObj = {
-                user_id: result.insertId,
-                pay_balance: 0.0
-            }
+                //insert user in customer table
+                let customerObj = {
+                    user_id: result.insertId,
+                    pay_balance: 0.0
+                }
 
-            let sql_customer = 'INSERT INTO client_user SET ?';
-            let query_customer = this.db.query(sql_customer, customerObj, (err, result) => {
-                if (err) {
-                    console.log(err);
+                let sql_customer = 'INSERT INTO client_user SET ?';
+                let query_customer = this.db.query(sql_customer, customerObj, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        let response = {
+                            success: false,
+                            error: {
+                                code: err.code,
+                                msg: err.sqlMessage
+                            }
+                        }
+                        return callback(response);
+                    }
+
                     let response = {
-                        success: false,
-                        error: {
-                            code: err.code,
-                            msg: err.sqlMessage
+                        success: true,
+                        data: {
+                            msg: "New User Created Successfully"
                         }
                     }
                     return callback(response);
-                }
 
+                });
+            } else {
                 let response = {
                     success: true,
                     data: {
@@ -61,19 +72,16 @@ var user = {
                     }
                 }
                 return callback(response);
+            }
 
-            });
 
         });
 
     },
     login: function (user, callback) {
-        //check if user with phone and password exists in table
-
-
-
-        let sql_salt = 'SELECT salt FROM user WHERE phone = ?';
-        let query_salt = this.db.query(sql_salt, user.phone, (err, result) => {
+        //check if user with id_card_no and password exists in table
+        let sql_salt = 'SELECT salt FROM user WHERE id_card_no = ?';
+        let query_salt = this.db.query(sql_salt, user.id_card_no, (err, result) => {
             if (err) {
                 console.log(err);
                 let response = {
@@ -100,8 +108,8 @@ var user = {
             let salt = result[0].salt;
 
             var passwordData = sha512(user.password, salt);
-            let sql_password = 'SELECT id FROM user WHERE phone = ? AND passwordHash = ?';
-            let query_salt = this.db.query(sql_password, [user.phone, passwordData.passwordHash], (err, result) => {
+            let sql_password = 'SELECT id,name,user_type,approve_status FROM user WHERE id_card_no = ? AND passwordHash = ?';
+            let query_salt = this.db.query(sql_password, [user.id_card_no, passwordData.passwordHash], (err, result) => {
                 if (err) throw err;
 
                 console.log(result);
@@ -118,7 +126,7 @@ var user = {
                         success: true,
                         data: {
                             msg: "user found.",
-                            user_id: result
+                            user: result[0]
                         }
                     }
                     return callback(response);
