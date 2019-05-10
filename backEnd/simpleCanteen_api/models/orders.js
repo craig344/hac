@@ -1,11 +1,11 @@
-const db = require('./../database');
 
 var orders = {
-    create: function (order, callback) {
+    create: function (db,order, callback) {
 
         let orderObj = {
+            customer_id: order.customer_id,
             total: order.total,
-            item_count:order.item_count
+            item_count: order.item_count
            
         }
 
@@ -33,7 +33,7 @@ var orders = {
 
         });
     },
-    getAll: function (callback) {
+    getAll: function (db,callback) {
         let sql = 'SELECT * FROM orders';
         let query = db.query(sql, (err, result) => {
             if (err) throw err;
@@ -50,14 +50,14 @@ var orders = {
                     success: true,
                     data: {
                         msg: "orders found.",
-                        items: result
+                        orders: result
                     }
                 }
                 return callback(response);
             }
         });
     },
-    getbyId: function (order, callback) {
+    getbyId: function (db,order, callback) {
         let sql = 'SELECT * FROM orders where id =?';
         let query = db.query(sql, [order.id], (err, result) => {
             if (err) throw err;
@@ -80,6 +80,57 @@ var orders = {
                 return callback(response);
             }
         });
+    },
+    getbyCustomerId: function (db,order, callback) {
+        let sql = 'SELECT * FROM orders where customer_id =?';
+        let query = db.query(sql, [order.customer_id], (err, result) => {
+            if (err) throw err;
+            if (result.length == 0) {
+                let response = {
+                    success: false,
+                    error: {
+                        msg: "No order Found"
+                    }
+                }
+                return callback(response);
+            } else {
+                let response = {
+                    success: true,
+                    data: {
+                        msg: "order found.",
+                        item: result
+                    }
+                }
+                return callback(response);
+            }
+        });
+    },
+    update: function (db,order, callback) {     
+
+        let sql = 'UPDATE orders SET total = ?,item_count = ?,status=? where id = ?';
+        let query = db.query(sql, [order.total, order.item_count, order.status, order.id], (err, result) => {
+            if (err) {
+                console.log(err);
+                let response = {
+                    success: false,
+                    error: {
+                        code: err.code,
+                        msg: err.sqlMessage
+                    }
+                }
+                return callback(response);
+            }            
+            
+            let response = {
+                success: true,
+                data: {
+                    msg: "Order Updated Successfully"
+                }
+            }
+            return callback(response);
+
+        });
+
     },
     getOrderDetailsbyId: function (order, callback) {
         let sql = 'SELECT orders.id,orders.created_at,orders.total,order_items.quantity,order_items.rate,item.name FROM orders join order_items join item ON orders.id = order_items.order_id AND item.id = order_items.item_id where orders.id =?';

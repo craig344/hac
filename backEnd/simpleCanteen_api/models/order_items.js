@@ -1,7 +1,6 @@
-const db = require('./../database');
 
 var order_items = {
-    create: function (order_item, callback) {
+    create: function (db,order_item, callback) {
 
         let order_itemObj = {
             order_id: order_item.order_id,

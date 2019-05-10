@@ -49,7 +49,7 @@ router.post('/users/register', [
         name: req.body.name,
         id_card_no: req.body.id_card_no,
         password: req.body.password,
-        type:req.body.type
+        type: req.body.type
     };
     const userModel = require('./../models/user');
     userModel.connect(db);
@@ -71,9 +71,9 @@ router.delete('/users/:id', function (req, res) {
 
 /**--------- Item Routes------------------------------------ */
 
-//add a new user to the db
+//add a new item to the db
 router.post('/item/create', [
-    // username must be an email
+    // name must be an email
     check('name')
         .isLength({ min: 5 }).withMessage('must be at least 5 chars long'),
     check('price')
@@ -89,11 +89,11 @@ router.post('/item/create', [
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
-        category:req.body.category
+        category: req.body.category
     };
     const itemModel = require('./../models/item');
-    
-    itemModel.create(db,item, function (response) {
+
+    itemModel.create(db, item, function (response) {
         res.send(response);
     });
 
@@ -103,7 +103,7 @@ router.post('/item/create', [
 //get a list of all items from the database
 router.get('/items', function (req, res) {
     const itemModel = require('./../models/item');
-    
+
     itemModel.getAll(db, function (response) {
         res.send(response);
     });
@@ -112,18 +112,18 @@ router.get('/items', function (req, res) {
 //get an  item by id from the database
 router.get('/item', function (req, res) {
     const itemModel = require('./../models/item');
-    var item ={
+    var item = {
         id: req.query.id
     };
-    itemModel.getbyId(db, item,function (response) {
+    itemModel.getbyId(db, item, function (response) {
         res.send(response);
     });
 });
 
 //update an item by id
-router.put('/item',function(req,res){
+router.put('/item', function (req, res) {
     const itemModel = require('./../models/item');
-    var item ={
+    var item = {
         id: req.body.id,
         name: req.body.name,
         description: req.body.description,
@@ -131,10 +131,105 @@ router.put('/item',function(req,res){
         category: req.body.category,
         available: req.body.available,
     };
-    itemModel.update(db, item,function (response) {
+    itemModel.update(db, item, function (response) {
         res.send(response);
     });
-    
+
 });
+
+/**--------- Order Routes------------------------------------ */
+
+//add a new order to the db
+router.post('/order', [
+    // name must be an email
+    check('customer_id')
+        .isInt().withMessage('must be an integer'),
+    check('total')
+        .isNumeric().withMessage('must be a Number'),
+    check('item_count')
+        .isInt().withMessage('must be an Integer'),
+], function (req, res) {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
+    var order = {
+        customer_id: req.body.customer_id,
+        total: req.body.total,
+        item_count: req.body.item_count
+    };
+    const orderModel = require('./../models/orders');
+
+    orderModel.create(db, order, function (response) {
+        res.send(response);
+    });
+
+});
+
+
+//get a list of all orders from the database
+router.get('/orders', function (req, res) {
+    const orderModel = require('./../models/orders');
+
+    orderModel.getAll(db, function (response) {
+        res.send(response);
+    });
+});
+
+//get an  order by order_id from the database
+router.get('/order', function (req, res) {
+    const orderModel = require('./../models/orders');
+    var order = {
+        id: req.query.id
+    };
+    orderModel.getbyId(db, order, function (response) {
+        res.send(response);
+    });
+});
+
+//get  orders by customer_id from the database
+router.get('/order/byCustomer', function (req, res) {
+    const orderModel = require('./../models/orders');
+    var order = {
+        customer_id: req.query.customer_id
+    };
+    orderModel.getbyCustomerId(db, order, function (response) {
+        res.send(response);
+    });
+});
+
+
+//update an order by id
+router.put('/order', [
+    // name must be an email
+    check('id')
+        .isInt().withMessage('must be an integer'),
+    check('total')
+        .isNumeric().withMessage('must be a Number'),
+    check('item_count')
+        .isInt().withMessage('must be an Integer'),
+], function (req, res) {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+    const orderModel = require('./../models/orders');
+    var order = {
+        id: req.body.id,
+        total: req.body.total,
+        item_count: req.body.item_count,
+        status: req.body.status
+    };
+    orderModel.update(db, order, function (response) {
+        res.send(response);
+    });
+
+});
+
+/**--------- Order Item Routes------------------------------------ */
+
 
 module.exports = router;
