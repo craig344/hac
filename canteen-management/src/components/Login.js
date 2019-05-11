@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {  withRouter,NavLink } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
+
+import Axios from 'axios';
 
 class Login extends Component {
 
@@ -22,9 +24,24 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        alert('A form was submitted: ' + this.state.name);
+        Axios.post('http://localhost:4000/api/users/login', {
+            id_card_no: this.state.number,
+            password: this.state.pass
+        })
+            .then((response)=> {
+                console.log(response);
+                var data = response.data;
+                if(data.success){
+                    this.props.history.push("/menu")
+                } else {
+                    alert("wrong credentials")
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         //this.setState({ loggedIn: true });
-        this.props.history.push("/menu")
+        
         // this.props.fn();
 
     }
@@ -59,7 +76,7 @@ class Login extends Component {
 
                                             <div className="form-group">
                                                 <label> Password: </label>
-                                                <input type="password" className="form-control" id="pass" value={this.state.password} onChange={this.state.handleChange} placeholder="Enter The Password" />
+                                                <input type="password" className="form-control" id="pass" value={this.state.password} onChange={this.handleChange} placeholder="Enter The Password" />
                                             </div>
                                         </div>
                                     </div>
