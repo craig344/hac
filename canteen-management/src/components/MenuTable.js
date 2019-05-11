@@ -4,15 +4,7 @@ import Axios from 'axios';
 export default class MenuTable extends Component {
     state = {
         data: {
-            columns: ['Name', 'Description', 'Price', 'Category'],
-            rows: [
-                {
-                    'Name': 'Veterinary Assitance',
-                    'Description': 50,
-                    'Price': '1 Hour',
-                    'Category': 12
-                }
-            ]
+            rows: []
         }
     }
     componentDidMount() {
@@ -40,22 +32,14 @@ export default class MenuTable extends Component {
     }
     render() {
 
-        // Data
-        let dataColumns = this.state.data.columns;
+      
         let dataRows = this.state.data.rows;
 
 
-        var tableHeaders = (<thead>
-            <tr>
-                {dataColumns.map(function (column) {
-                    return <th key={column}>{column}</th>;
-                })}
-            </tr>
-        </thead>);
 
         var tableBody = dataRows.map(function (row) {
             return (
-                <div className="card" style={cardStyle}>
+                <div key={row['id']} className="card" style={cardStyle}>
                     <div className="card-body">
                         <h5 className="card-title">{row['Name']}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">Rs.{row['Price']}/-</h6>
@@ -71,7 +55,7 @@ export default class MenuTable extends Component {
         // Decorate with Bootstrap CSS
         return (
             <div className="container-fluid">
-                <div className="row  card-deck">
+                <div className="row">
                     {tableBody}
                 </div>
 

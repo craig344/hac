@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MenuTable from './MenuTable';
-
+import Axios from 'axios';
 
 class App extends Component {
 
@@ -9,7 +9,8 @@ class App extends Component {
     items: {
       name: '',
       description: '',
-      price: ''
+      price: '',
+      category:''
     }
   }
 
@@ -26,13 +27,21 @@ class App extends Component {
 
   addItem = _ => {
     const { items } = this.state;
-    fetch(`http://localhost:4000/item/add?name=${items.name}&description=${items.description}&price=${items.price}`)
-      //.then(response => response.json())
-      .then(this.getItem)
-      .catch(err => console.error(err))
+    Axios.post('http://localhost:4000/api/item/create', {
+      name: items.name,
+      price: items.price,
+      description: items.description,
+      category: items.category
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  renderItems = ({ id, name, description, price }) => <div key={id}>{name}{description}{price}</div>
+  renderItems = ({ id, name, description, price,category }) => <div key={id}>{name}{description}{price}{category}</div>
 
   render() {
     const { item, items } = this.state;
@@ -84,6 +93,15 @@ class App extends Component {
                         <input
                           value={items.price}
                           onChange={e => this.setState({ items: { ...items, price: e.target.value } })}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label className="col-sm-4 col-form-label"> Category </label>
+                      <div className="col-sm-8">
+                        <input
+                          value={items.category}
+                          onChange={e => this.setState({ items: { ...items, category: e.target.value } })}
                         />
                       </div>
                     </div>
