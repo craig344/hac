@@ -1,45 +1,30 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-import Navbar from "./components/Navbar";
-import Menu from './components/Menu';
+import Pages from './components/pages';
 
-function App() {
-  return (
-    <BrowserRouter>
-    <Navbar />
-      <div className="row">
-        <div className="col-3"></div>
-        <div className="col-6 card bg-light">
-
-          <ul className="nav nav-tabs">
-            <li className="nav-item">
-              <NavLink exact to="/" activeClassName="nav-link  active" className="nav-link"> Login </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink exact to="/signUp" activeClassName="nav-link  active" className="nav-link"> Sign Up </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink exact to="/menu" activeClassName="nav-link  active" className="nav-link"> Menu </NavLink>
-            </li>
-          </ul>
-          <Route exact path="/SignUp" component={SignUp}>
-
-          </Route>
-
-          <Route exact path="/" component={Login}>
-
-          </Route>
-          <Route exact path="/menu" component={Menu}>
-
-          </Route>
-        </div>
-      </div>
-    </BrowserRouter>
+class App extends React.Component {
 
 
-  );
+
+  render() {
+    return (
+      <BrowserRouter>
+
+        <Route exact path="/SignUp" component={SignUp}></Route>
+        <Route exact path="/menu" render={(props)=>(<Pages page={"menu"} {...props}/>)} ></Route>
+        <Route exact path="/cart" render={(props)=>(<Pages page={"cart"} {...props}/>)} ></Route>
+        <Route exact path="/orders" render={(props)=>(<Pages page={"orders"} {...props}/>)} ></Route>
+        <Route exact path="/kitchen" render={(props)=>(<Pages page={"kitchen"} {...props}/>)} ></Route>
+        <Route exact path="/" component={Login}></Route>       
+
+      </BrowserRouter> 
+
+
+    );
+  }
+
 }
 
 export default App;
