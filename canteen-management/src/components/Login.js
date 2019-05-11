@@ -7,7 +7,7 @@ class Login extends Component {
 
         this.state = {
             number: '',
-            password: ''
+            pass: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -15,7 +15,7 @@ class Login extends Component {
     }
 
     handleChange(event) {
-        this.setState({ name: event.target.value });
+        this.setState({ [event.target.id]: event.target.value });
     }
 
     handleSubmit(event) {
@@ -38,7 +38,7 @@ class Login extends Component {
 
                             <div className="form-group">
                                 <label> Password: </label>
-                                <input type="password" className="form-control" id="password" value={this.state.password} onChange={this.state.handleChange} placeholder="Enter The Password" />
+                                <input type="password" className="form-control" id="pass" value={this.state.password} onChange={this.state.handleChange} placeholder="Enter The Password" />
                             </div>
                         </div>
                     </div>
