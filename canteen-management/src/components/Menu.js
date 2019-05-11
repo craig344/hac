@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MenuTable from './MenuTable';
 
 
 class App extends Component {
@@ -37,7 +38,7 @@ class App extends Component {
     const { item, items } = this.state;
     return (
       <div>
-
+        <MenuTable />
         <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
           Add Item
         </button>
