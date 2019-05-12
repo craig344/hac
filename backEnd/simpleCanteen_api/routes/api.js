@@ -239,6 +239,30 @@ router.put('/order', [
 
 });
 
+//update an order status by id
+router.put('/order/status', [
+    // name must be an email
+    check('id')
+    .isLength({ min: 1 }).withMessage('must be at least 1 chars long'),
+    check('status')
+    .isLength({ min: 1 }).withMessage('must be at least 1 chars long'),
+], function (req, res) {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+    const orderModel = require('./../models/orders');
+    var order = {
+        id: req.body.id,
+        status: req.body.status
+    };
+    orderModel.updateStatus(db, order, function (response) {
+        res.send(response);
+    });
+
+});
+
 /**--------- Order Item Routes------------------------------------ */
 
 //add a new orderItem to the db

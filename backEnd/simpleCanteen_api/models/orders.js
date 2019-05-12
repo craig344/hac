@@ -156,6 +156,32 @@ var orders = {
         });
 
     },
+    updateStatus: function (db,order, callback) {     
+
+        let sql = 'UPDATE orders SET status=? where id = ?';
+        let query = db.query(sql, [order.status, order.id], (err, result) => {
+            if (err) {
+                console.log(err);
+                let response = {
+                    success: false,
+                    error: {
+                        code: err.code,
+                        msg: err.sqlMessage
+                    }
+                }
+                return callback(response);
+            }            
+            let response = {
+                success: true,
+                data: {
+                    msg: "Order Updated Successfully"
+                }
+            }
+            return callback(response);
+
+        });
+
+    },
     getOrderDetailsbyId: function (order, callback) {
         let sql = 'SELECT orders.id,orders.created_at,orders.total,order_items.quantity,order_items.rate,item.name FROM orders join order_items join item ON orders.id = order_items.order_id AND item.id = order_items.item_id where orders.id =?';
         let query = db.query(sql, [order.id], (err, result) => {
