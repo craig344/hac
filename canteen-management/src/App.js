@@ -13,13 +13,17 @@ class App extends React.Component {
   login = (user)=>{
     this.setState({isLoggedIn:true,user:user})
   }
+
+  logout = ()=>{
+    this.setState({isLoggedIn:false,user:null})
+  }
   render() {
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/SignUp" component={SignUp}></Route>
           <Route exact path="/login" render={(props) => (<Login login={this.login} {...props} />)} ></Route>
-          <PrivateRoute path="/" isLoggedIn={this.state.isLoggedIn} user={this.state.user} component={Pages} />)} />
+          <PrivateRoute path="/" isLoggedIn={this.state.isLoggedIn} logout={this.logout} user={this.state.user} component={Pages} />)} />
         </Switch>
       </BrowserRouter>
 
@@ -34,7 +38,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => 
      (
     rest.isLoggedIn === true
-      ? <Component {...props} />
+      ? <Component user={rest.user} logout={rest.logout} {...props} />
        : <Redirect to='/login' />
    )
  

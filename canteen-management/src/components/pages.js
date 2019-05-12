@@ -12,7 +12,7 @@ export default class Pages extends Component {
     render() {
         return (
             <div>
-                <Navbar />                
+                <Navbar user={this.props.user} logout={this.props.logout}/>                
                 <Switch>
                     <Route path={`/menu`} component={Menu} />
                     <Route path={`/cart`} component={Cart} />
