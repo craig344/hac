@@ -59,14 +59,17 @@ router.post('/users/register', [
 
 });
 
-//update a ninja in the db
-router.put('/users/:id', function (req, res) {
-    res.send({ type: 'PUT' });
-});
+//get customerid by user id
+router.get('/user/customerId', function (req, res) {
+    const userModel = require('./../models/user');
+    userModel.connect(db);
 
-//delete a nninja from the db
-router.delete('/users/:id', function (req, res) {
-    res.send({ type: 'DELETE' });
+    var user = {
+        id: req.query.id
+    };
+    userModel.getCustomerIdbyUserId( user, function (response) {
+        res.send(response);
+    });
 });
 
 /**--------- Item Routes------------------------------------ */
@@ -243,9 +246,9 @@ router.put('/order', [
 router.put('/order/status', [
     // name must be an email
     check('id')
-    .isLength({ min: 1 }).withMessage('must be at least 1 chars long'),
+        .isLength({ min: 1 }).withMessage('must be at least 1 chars long'),
     check('status')
-    .isLength({ min: 1 }).withMessage('must be at least 1 chars long'),
+        .isLength({ min: 1 }).withMessage('must be at least 1 chars long'),
 ], function (req, res) {
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
@@ -298,9 +301,9 @@ router.post('/orderItem', [
 
 //add a new orderItem array to the db
 router.post('/orderItems', function (req, res) {
-   
+
     var orderItems = req.body;
-   
+
     const orderItemModel = require('./../models/order_items');
 
     orderItemModel.createMultiple(db, orderItems, function (response) {

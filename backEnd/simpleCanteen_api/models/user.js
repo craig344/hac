@@ -134,6 +134,30 @@ var user = {
             });
 
         });
+    },
+    getCustomerIdbyUserId: function (user, callback) {
+        let sql = 'SELECT id FROM client_user where user_id =?';
+        let query = this.db.query(sql, [user.id], (err, result) => {
+            if (err) throw err;
+            if (result.length == 0) {
+                let response = {
+                    success: false,
+                    error: {
+                        msg: "No User Found"
+                    }
+                }
+                return callback(response);
+            } else {
+                let response = {
+                    success: true,
+                    data: {
+                        msg: "User found.",
+                        item: result
+                    }
+                }
+                return callback(response);
+            }
+        });
     }
 }
 
