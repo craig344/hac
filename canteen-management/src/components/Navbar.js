@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 
 class Navbar extends React.Component {
-    logout = (event)=>{
+    logout = (event) => {
         event.preventDefault();
         this.props.logout();
     }
-    
+
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,11 +28,17 @@ class Navbar extends React.Component {
                         <li className="nav-item">
                             <NavLink exact to="/kitchen" activeClassName="nav-link  active" className="nav-link"> Kitchen </NavLink>
                         </li>
-                        <li className="nav-item">
-                        <a class="nav-link" onClick={this.logout} href="#">Logout</a>
-                        </li>
                     </ul>
+
                 </div>
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <a className="nav-link active" activeClassName="nav-link  active" href="#">Welcome {this.props.user.name}</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={this.logout} href="#">Logout</a>
+                    </li>
+                </ul>
             </nav>
         );
 
