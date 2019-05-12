@@ -309,4 +309,16 @@ router.post('/orderItems', function (req, res) {
 
 });
 
+
+//get   orderItems by order_id from the database
+router.get('/orderItems/byOrderId', function (req, res) {
+    const orderItemModel = require('./../models/order_items');
+    var orderItems = {
+        order_id: req.query.order_id
+    };
+    orderItemModel.getbyOrderId(db, orderItems, function (response) {
+        res.send(response);
+    });
+});
+
 module.exports = router;

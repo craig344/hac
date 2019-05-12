@@ -75,6 +75,33 @@ var order_items = {
 
         });
     },
+    getbyOrderId: function (db,order_item, callback) {
+        let sql = 'SELECT * FROM order_items join item on item.id=order_items.item_id where order_id =?';
+        let query = db.query(sql, [order_item.order_id], (err, result) => {
+            if (err) throw err;
+            
+            if (result.length == 0) {
+                let response = {
+                    success: false,
+                    error: {
+                        msg: "No order Items Found"
+                    }
+                }
+                return callback(response);
+            } else {
+               
+                
+                let response = {
+                    success: true,
+                    data: {
+                        msg: "item found.",
+                        item: result
+                    }
+                }
+                return callback(response);
+            }
+        });
+    },
     
     getSalesPerDay: function (range, callback) {
         let sql = "SELECT DATE(order_items.created_at) as date,sum(order_items.quantity) as total_qty FROM order_items join item ON item.id = order_items.item_id where item.id=? AND date(order_items.`created_at`) >= date(?) AND date(order_items.`created_at`) <= date(?) group by DATE(order_items.created_at)";

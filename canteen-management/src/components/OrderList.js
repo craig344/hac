@@ -4,12 +4,8 @@ import Axios from 'axios';
 export default class OrderList extends Component {
   state = {
     data: {
-      columns: ['#Id', '#Items'],
-      rows: [{
-        'Service': 'Veterinary Assitance',
-        'Cost/Unit': 50,
-        'Unit': '1 Hour',
-      }]
+      columns: ['id', 'items'],
+      rows: []
     }
   }
 
@@ -17,26 +13,49 @@ export default class OrderList extends Component {
     Axios.get('http://localhost:4000/api/order/byStatus?status=placed').then(
       (response) => {
         console.log(response);
+        if (response.data.success) {
+          let items = response.data.data.item;
+          let trows = items.map(function (item) {
+            let titem = {
+              'id': item.id,
+              'items': item.item_count
 
-        let items = response.data.data.item;
-        let trows = items.map(function (item) {
-          let titem = {
-            '#Id': item.id,
-            '#Items': item.item_count
-
-          }
-          return titem;
-        });
-        var ndata = this.state.data;
-        ndata.rows = trows;
-        this.setState({ data: ndata });
-
+            }
+            return titem;
+          });
+          var ndata = this.state.data;
+          ndata.rows = trows;
+          this.setState({ data: ndata });
+        }
       }
     );
 
   }
   markComplete = (event) => {
-    console.log(event.target.getAttribute('data-id'));
+    let orderId = event.target.getAttribute('data-id');
+    Axios.put('http://localhost:4000/api/order/status', {
+      id: orderId,
+      status: 'completed'
+    })
+      .then((response) => {
+        let data = response.data;
+        if (data.success) {
+          let newRows = this.state.data.rows.filter((row) => {
+            if (row.id != orderId) {
+              return true;
+            }
+          })
+
+          let tmpData = this.state.data;
+          tmpData.rows = newRows;
+
+          this.setState({ data: tmpData });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
 
   }
   render() {
@@ -62,18 +81,18 @@ export default class OrderList extends Component {
           })}
           <td>
             <div className="btn-group btn-group-lg">
-              <button data-id={row['#Id']} type="button" className="btn btn-primary ">View</button>
-            <button data-id={row['#Id']} onClick={this.markComplete} type="button" className="btn btn-success ">Complete</button>
+              <button data-id={row['id']} type="button" className="btn btn-primary ">View</button>
+              <button data-id={row['id']} onClick={this.markComplete} type="button" className="btn btn-success ">Complete</button>
             </div>
           </td>
         </tr >);
-  });
+    });
 
-  // Decorate with Bootstrap CSS
-  return(<table className = "table table-bordered table-hover" width = "100%" >
-    { tableHeaders }
-    < tbody >
-    { tableBody }
+    // Decorate with Bootstrap CSS
+    return (<table className="table table-bordered table-hover" width="100%" >
+      {tableHeaders}
+      < tbody >
+        {tableBody}
       </tbody>
     </table >)
   }
