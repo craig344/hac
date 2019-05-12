@@ -58,6 +58,10 @@ export default class OrderList extends Component {
 
 
   }
+  viewOrder=(event)=>{
+    let orderId = event.target.getAttribute('data-id');
+    this.props.changeOrder(orderId);
+  }
   render() {
 
     // Data
@@ -81,7 +85,7 @@ export default class OrderList extends Component {
           })}
           <td>
             <div className="btn-group btn-group-lg">
-              <button data-id={row['id']} type="button" className="btn btn-primary ">View</button>
+              <button data-id={row['id']} onClick={this.viewOrder} type="button" className="btn btn-primary ">View</button>
               <button data-id={row['id']} onClick={this.markComplete} type="button" className="btn btn-success ">Complete</button>
             </div>
           </td>
