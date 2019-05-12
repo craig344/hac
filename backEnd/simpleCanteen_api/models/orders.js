@@ -105,6 +105,30 @@ var orders = {
             }
         });
     },
+    getbyStatus: function (db,order, callback) {
+        let sql = 'SELECT * FROM orders where status =?';
+        let query = db.query(sql, [order.status], (err, result) => {
+            if (err) throw err;
+            if (result.length == 0) {
+                let response = {
+                    success: false,
+                    error: {
+                        msg: "No order Found"
+                    }
+                }
+                return callback(response);
+            } else {
+                let response = {
+                    success: true,
+                    data: {
+                        msg: "order found.",
+                        item: result
+                    }
+                }
+                return callback(response);
+            }
+        });
+    },
     update: function (db,order, callback) {     
 
         let sql = 'UPDATE orders SET total = ?,item_count = ?,status=? where id = ?';

@@ -199,6 +199,16 @@ router.get('/order/byCustomer', function (req, res) {
         res.send(response);
     });
 });
+//get  orders by order status from the database
+router.get('/order/byStatus', function (req, res) {
+    const orderModel = require('./../models/orders');
+    var order = {
+        status: req.query.status
+    };
+    orderModel.getbyStatus(db, order, function (response) {
+        res.send(response);
+    });
+});
 
 
 //update an order by id

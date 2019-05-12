@@ -33,7 +33,7 @@ class Navbar extends React.Component {
                 </div>
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <a className="nav-link active" activeClassName="nav-link  active" href="#">Welcome {this.props.user.name}</a>
+                        <a className="nav-link active"  href="#">Welcome {this.props.user.name}</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={this.logout} href="#">Logout</a>

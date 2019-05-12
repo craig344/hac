@@ -431,6 +431,43 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get orders by status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:4000/api/order/byStatus?status=placed",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"order",
+								"byStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "placed"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
