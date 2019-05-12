@@ -30,9 +30,10 @@ class Login extends Component {
         })
             .then((response)=> {
                 console.log(response);
-                var data = response.data;
+                var data = response.data;               
                 if(data.success){
-                    this.props.history.push("/menu")
+                    this.props.login(data.data.user);
+                    this.props.history.push("/pages/menu")
                 } else {
                     alert("wrong credentials")
                 }
