@@ -33,7 +33,7 @@ class Login extends Component {
                 var data = response.data;               
                 if(data.success){
                     this.props.login(data.data.user);
-                    this.props.history.push("/pages/menu")
+                    this.props.history.push("/menu")
                 } else {
                     alert("wrong credentials")
                 }

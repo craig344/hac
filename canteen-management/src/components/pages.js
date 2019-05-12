@@ -14,10 +14,10 @@ export default class Pages extends Component {
             <div>
                 <Navbar />                
                 <Switch>
-                    <Route path={`${this.props.match.url}/menu`} component={Menu} />
-                    <Route path={`${this.props.match.url}/cart`} component={Cart} />
-                    <Route path={`${this.props.match.url}/orders`} component={Orders} />
-                    <Route path={`${this.props.match.url}/kitchen`} component={Kitchen} />
+                    <Route path={`/menu`} component={Menu} />
+                    <Route path={`/cart`} component={Cart} />
+                    <Route path={`/orders`} component={Orders} />
+                    <Route path={`/kitchen`} component={Kitchen} />
                 </Switch>
             </div>
         )

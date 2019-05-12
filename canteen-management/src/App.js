@@ -19,8 +19,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/SignUp" component={SignUp}></Route>
           <Route exact path="/login" render={(props) => (<Login login={this.login} {...props} />)} ></Route>
-          <PrivateRoute path="/pages" isLoggedIn={this.state.isLoggedIn} user={this.state.user} component={Pages} />)} />
-
+          <PrivateRoute path="/" isLoggedIn={this.state.isLoggedIn} user={this.state.user} component={Pages} />)} />
         </Switch>
       </BrowserRouter>
 
