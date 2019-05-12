@@ -9,11 +9,26 @@ class SignUp extends Component {
         this.state = {
             name: '',
             number: '',
-            dob: '',
             password: '',
             address: '',
             email: ''
         };
+
+        addItem = _ => {
+            const { users } = this.state;
+            Axios.post('http://localhost:4000/api/users/register', {
+              name: users.name,
+              number: users.price,
+              address: users.description,
+              email: users.category
+            })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,11 +76,6 @@ class SignUp extends Component {
                                     </div>
 
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label> DOB: </label>
-                                            <input type="date" className="form-control" id="date" value={this.state.dob} placeholder="Enter Your Dob" onChange={this.handleChange} />
-                                        </div>
-
                                         <div className="form-group">
                                             <label> Password: </label>
                                             <input type="password" className="form-control" id="password" value={this.state.password} placeholder="Enter Your password" onChange={this.handleChange} />
