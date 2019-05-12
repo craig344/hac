@@ -46,7 +46,19 @@ export default class MenuTable extends Component {
                         <p className="card-text">{row['Description']}</p>
                     </div>
                     <div className="card-footer">
-                        <small className="text-muted">{row['Category']}</small>
+                    <div className="row">
+                    <div className="col-4">
+                    <small className="text-muted">{row['Category']}</small>
+                    </div>
+                    <div className="col-4">
+                    <input type="number" value="1" className="form-control"></input>
+                    </div>
+                    <div className="col-4">
+                    <button type="button" className="btn btn-primary">Add</button>
+                    </div>
+                    </div>
+                        
+                        
                     </div>
                 </div>
             );
