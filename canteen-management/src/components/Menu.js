@@ -10,7 +10,7 @@ class App extends Component {
       name: '',
       description: '',
       price: '',
-      category:''
+      category: ''
     }
   }
 
@@ -41,17 +41,26 @@ class App extends Component {
       });
   }
 
-  renderItems = ({ id, name, description, price,category }) => <div key={id}>{name}{description}{price}{category}</div>
+  renderItems = ({ id, name, description, price, category }) => <div key={id}>{name}{description}{price}{category}</div>
 
   render() {
     const { item, items } = this.state;
     return (
       <div>
         <MenuTable />
-        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Add Item
-        </button>
 
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-12">
+              <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add Item
+        </button>
+            </div>
+
+
+          </div>
+
+        </div>
 
         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
