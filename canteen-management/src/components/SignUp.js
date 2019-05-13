@@ -33,7 +33,7 @@ class SignUp extends Component {
               name: this.state.name,
               id_card_no: this.state.number,
               password: this.state.password,
-              type: "this.state.type"
+              type: "customer"
             })
               .then(function (response) {
                 console.log(response);

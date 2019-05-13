@@ -44,7 +44,8 @@ router.post('/users/register', [
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-
+    console.log("register user");
+    
     var user = {
         name: req.body.name,
         id_card_no: req.body.id_card_no,
