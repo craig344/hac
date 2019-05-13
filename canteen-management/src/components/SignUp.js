@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {  NavLink } from "react-router-dom";
 
+import Axios from 'axios';
+
 class SignUp extends Component {
 
     constructor(props) {
@@ -14,21 +16,6 @@ class SignUp extends Component {
             email: ''
         };
 
-        addItem = _ => {
-            const { users } = this.state;
-            Axios.post('http://localhost:4000/api/users/register', {
-              name: users.name,
-              number: users.price,
-              address: users.description,
-              email: users.category
-            })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,6 +28,19 @@ class SignUp extends Component {
     handleSubmit(event) {
         alert('A form was submitted: ' + this.state.name);
         event.preventDefault();
+        const { users } = this.state;
+            Axios.post('http://localhost:4000/api/users/register', {
+              name: this.state.name,
+              id_card_no: this.state.number,
+              password: this.state.password,
+              type: "this.state.type"
+            })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
     }
 
     render() {
