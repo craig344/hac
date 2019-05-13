@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Navbar from "./Navbar";
 
@@ -12,11 +12,11 @@ export default class Pages extends Component {
     render() {
         return (
             <div>
-                <Navbar user={this.props.user} logout={this.props.logout}/>                
+                <Navbar user={this.props.user} logout={this.props.logout} />
                 <Switch>
                     <Route path={`/menu`} component={Menu} />
                     <Route path={`/cart`} component={Cart} />
-                    <Route path={`/orders`} component={Orders} />
+                    <Route path={`/orders`} render={(props) => (<Orders user={this.props.user} {...props} />)} />
                     <Route path={`/kitchen`} component={Kitchen} />
                 </Switch>
             </div>

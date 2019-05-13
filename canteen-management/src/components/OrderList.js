@@ -50,6 +50,7 @@ export default class OrderList extends Component {
           tmpData.rows = newRows;
 
           this.setState({ data: tmpData });
+          this.props.changeOrder(0);
         }
       })
       .catch(function (error) {
